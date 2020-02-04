@@ -1,6 +1,6 @@
-**Google Cloud Platformda Terraform ile Kaynak Oluşturma**
+**Terraform Google Cloud Platform Provider**
 
-Google Cloud da bir proje oluşturuyoruz
+Create project in google cloud platform
 
  ```
  gcloud projects create [project-name]
@@ -8,7 +8,7 @@ Google Cloud da bir proje oluşturuyoruz
  gcloud config set project [project-name]
  
  ```
-ve oluşturduğumuz projede terraform scriptine yetki vermek için bir service account oluşturuyoruz.Bu service accounta proje düzeyinde editor yetkisi veriyoruz. Oluşturduğumuz service accounta bir anahtar oluşturup, anahtar json dosyasını bilgisayarımıza indiriyoruz. Bu dosyayı daha sonra yetki vermek için kullanacağız.
+In order to grant terraform script for google cloud resource provisioning create a service account. Grant this service account as project level editor. Create Service account key and download key as json. We will use this key in terraform script for granting access to google cloud platform
 
 ```
 gcloud iam service-accounts create [service-account-name] 
@@ -20,21 +20,20 @@ gcloud projects add-iam-policy-binding terraform-demo-2020 --member serviceAccou
 gcloud iam service-accounts keys create ~/key.json --iam-account terra-demo@terraform-demo-2020.iam.gserviceaccount.com
 
 ```
-Proje için faturalandırmayı aktif edin (https://console.cloud.google.com/ >> IAM and admin >> Manage Resources >> Project >> Billing)
+Activate billing for project (https://console.cloud.google.com/ >> IAM and admin >> Manage Resources >> Project >> Billing)
 
-Compute Engine API ve Cloud DNS API aktive edin
+Enable Compute Engine API ve Cloud DNS API
 ```
 gcloud services enable   compute.googleapis.com
 gcloud services enable  dns.googleapis.com 
 
 ```
-main.tf dosyasının bulunduğu dosyada 
+inside the project folder run below code  
 
 ```
 terraform init 
 terraform apply 
 ```
-kodlarını çalıştırın
 
 
 
