@@ -33,13 +33,12 @@ resource "google_compute_instance" "vm_instance" {
       size = 50
     }
   }
-
+  metadata = {
+   ssh-keys = "heely:${file("~/.ssh/id_rsa.pub")}"
+  }
   network_interface {
     network = google_compute_network.vpc_network.name
     access_config {
     }
-  }
-  provisioner "local-exec" {
-    command = "echo ${google_compute_instance.vm_instance.name} >> ip_address.txt"
   }
 }
